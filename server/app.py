@@ -1,4 +1,3 @@
-# server/app.py
 from flask import Flask, make_response
 from flask_migrate import Migrate
 
@@ -12,11 +11,9 @@ migrate = Migrate(app, db)
 
 db.init_app(app)
 
-
 @app.route('/')
 def index():
-    return '<h1>Zoo app</h1>'
-
+    return '<h1>Zoo App</h1>'
 
 @app.route('/animal/<int:id>')
 def animal_by_id(id):
@@ -29,7 +26,6 @@ def animal_by_id(id):
     response_body += f'<ul>Enclosure: {animal.enclosure.environment}</ul>'
 
     return make_response(response_body)
-
 
 @app.route('/zookeeper/<int:id>')
 def zookeeper_by_id(id):
@@ -44,7 +40,6 @@ def zookeeper_by_id(id):
 
     return make_response(response_body)
 
-
 @app.route('/enclosure/<int:id>')
 def enclosure_by_id(id):
     enclosure = Enclosure.query.filter(Enclosure.id == id).first()
@@ -57,7 +52,6 @@ def enclosure_by_id(id):
         response_body += f'<ul>Animal: {animal.name}</ul>'
 
     return make_response(response_body)
-
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
